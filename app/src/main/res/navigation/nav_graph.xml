@@ -3,25 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/nav_home">
 
     <fragment
-        android:id="@+id/homeFragment"
+        android:id="@+id/nav_home"
         android:name="org.rubikamp.wallpaper.fragments.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
     <fragment
-        android:id="@+id/profileFragment"
+        android:id="@+id/nav_profile"
         android:name="org.rubikamp.wallpaper.fragments.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
-        android:id="@+id/aboutuSFragment"
+        android:id="@+id/nav_aboutus"
         android:name="org.rubikamp.wallpaper.fragments.AboutuSFragment"
         android:label="fragment_aboutu_s"
         tools:layout="@layout/fragment_aboutus" />
     <fragment
-        android:id="@+id/settingFragment"
+        android:id="@+id/nav_setting"
         android:name="org.rubikamp.wallpaper.fragments.SettingFragment"
         android:label="fragment_setting"
         tools:layout="@layout/fragment_setting" />
