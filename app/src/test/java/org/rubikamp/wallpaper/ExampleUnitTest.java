@@ -1,4 +1,4 @@
-package info.sanaebadi.wallpaper;
+package org.rubikamp.wallpaper;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package info.sanaebadi.wallpaper;
+package org.rubikamp.wallpaper;
 
 import android.content.Context;
 
