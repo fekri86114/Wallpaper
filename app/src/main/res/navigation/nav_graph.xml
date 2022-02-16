@@ -8,21 +8,21 @@
     <fragment
         android:id="@+id/nav_home"
         android:name="org.rubikamp.wallpaper.fragments.HomeFragment"
-        android:label="fragment_home"
+        android:label="HOME"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/nav_profile"
         android:name="org.rubikamp.wallpaper.fragments.ProfileFragment"
-        android:label="fragment_profile"
+        android:label="PROFILE"
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/nav_aboutus"
         android:name="org.rubikamp.wallpaper.fragments.AboutuSFragment"
-        android:label="fragment_aboutu_s"
+        android:label="ABOUT US"
         tools:layout="@layout/fragment_aboutus" />
     <fragment
         android:id="@+id/nav_setting"
         android:name="org.rubikamp.wallpaper.fragments.SettingFragment"
-        android:label="fragment_setting"
+        android:label="SETTING"
         tools:layout="@layout/fragment_setting" />
 </navigation>
