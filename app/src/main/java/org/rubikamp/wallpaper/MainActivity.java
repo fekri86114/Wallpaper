@@ -27,22 +27,22 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(bottomNavigationView, navController);
 
-        navController.addOnDestinationChangedListener((navController1, navDestination, bundle) -> {
-            int id = navDestination.getId();
-            switch (id) {
-                case R.id.nav_home:
-                    Toast.makeText(MainActivity.this, "HoME", Toast.LENGTH_LONG).show();
-                    break;
-                case R.id.nav_profile:
-                    Toast.makeText(MainActivity.this, "PROFILE", Toast.LENGTH_LONG).show();
-                    break;
-                case R.id.nav_aboutus:
-                    Toast.makeText(MainActivity.this, "ABOUT US", Toast.LENGTH_LONG).show();
-                    break;
-                case R.id.nav_setting:
-                    Toast.makeText(MainActivity.this, "SETTING", Toast.LENGTH_LONG).show();
-                    break;
-            }
-        });
+//        navController.addOnDestinationChangedListener((navController1, navDestination, bundle) -> {
+//            int id = navDestination.getId();
+//            switch (id) {
+//                case R.id.nav_home:
+//                    Toast.makeText(MainActivity.this, "HoME", Toast.LENGTH_LONG).show();
+//                    break;
+//                case R.id.nav_profile:
+//                    Toast.makeText(MainActivity.this, "PROFILE", Toast.LENGTH_LONG).show();
+//                    break;
+//                case R.id.nav_aboutus:
+//                    Toast.makeText(MainActivity.this, "ABOUT US", Toast.LENGTH_LONG).show();
+//                    break;
+//                case R.id.nav_setting:
+//                    Toast.makeText(MainActivity.this, "SETTING", Toast.LENGTH_LONG).show();
+//                    break;
+//            }
+//        });
     }
 }
