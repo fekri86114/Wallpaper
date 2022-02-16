@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "955636072149",
+    "project_id": "wallpaper-rubikamp",
+    "storage_bucket": "wallpaper-rubikamp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:955636072149:android:974f023926ac765795ec5c",
+        "android_client_info": {
+          "package_name": "org.rubikamp.wallpaper"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "955636072149-tr1a4sc6lledaass3ubuhcmmk6hkqjqj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.rubikamp.wallpaper",
+            "certificate_hash": "23018e22d58b73931fb0805c5e7db34d8a95aead"
+          }
+        },
+        {
+          "client_id": "955636072149-5hmd3qgrv15dh3gov8nses2k9ll72g76.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8Og8IqyZKCj2ge_I6RZkwl5s1jGHtKsI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "955636072149-5hmd3qgrv15dh3gov8nses2k9ll72g76.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
