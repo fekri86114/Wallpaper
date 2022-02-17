@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="org.rubikamp.wallpaper.fragments.HomeFragment"
+        android:label="HOME"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="org.rubikamp.wallpaper.fragments.ProfileFragment"
+        android:label="PROFILE"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/nav_aboutus"
+        android:name="org.rubikamp.wallpaper.fragments.AboutuSFragment"
+        android:label="ABOUT US"
+        tools:layout="@layout/fragment_aboutus" />
+    <fragment
+        android:id="@+id/nav_setting"
+        android:name="org.rubikamp.wallpaper.fragments.SettingFragment"
+        android:label="SETTING"
+        tools:layout="@layout/fragment_setting" />
+</navigation>
