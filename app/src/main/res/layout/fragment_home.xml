@@ -3,18 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/darker_gray"
     tools:context=".fragments.HomeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/textview_test"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview_wallpaper"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:textColor="@color/primaryTextColor"
-        android:textSize="@dimen/text_size_large"
-        android:text="@string/home" />
+        tools:listitem="@layout/item_recyclerview_wallpaper"
+        android:layout_marginTop="@dimen/spacing_2x"
+        android:padding="@dimen/spacing_2x"/>
 
 </FrameLayout>
