@@ -12,11 +12,17 @@
         <activity
             android:name="org.rubikamp.wallpaper.MainActivity"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+        </activity>
+
+        <activity android:name=".fragments.LifecycleActivity"
+            android:exported="true">
         </activity>
     </application>
 
