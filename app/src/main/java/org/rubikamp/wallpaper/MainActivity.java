@@ -13,27 +13,28 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
+import org.rubikamp.wallpaper.databinding.ActivityMainBinding;
+
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private NavigationView navigationView;
-    private Toolbar toolbar;
-    private DrawerLayout drawerLayout;
     private NavController navController;
     private ActionBarDrawerToggle drawerToggle;
 
+    private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
         navController = Navigation.findNavController(this, R.id.nav_fragment);
         setupBottomNav();
         setupDrawerNav();
@@ -42,28 +43,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     private void setupDrawerNav() {
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        setSupportActionBar(binding.toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        drawerLayout = findViewById(R.id.drawer_layout);
-        navigationView = findViewById(R.id.navigationView);
         drawerToggle = setupDrawerToggle();
         // Setup toggle to display hamburger icon with nice animation
         drawerToggle.setDrawerIndicatorEnabled(true);
         drawerToggle.syncState();
         // Tie DrawerLayout events to the ActionBarToggle
-        drawerLayout.addDrawerListener(drawerToggle);
+        binding.drawerLayout.addDrawerListener(drawerToggle);
 
-        NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout);
-        NavigationUI.setupWithNavController(navigationView, navController);
-        navigationView.setNavigationItemSelectedListener(this);
+        NavigationUI.setupActionBarWithNavController(this, navController, binding.drawerLayout);
+        NavigationUI.setupWithNavController(binding.navigationView, navController);
+        binding.navigationView.setNavigationItemSelectedListener(this);
 
     }
 
     private void setupBottomNav() {
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigatin_view);
-        NavigationUI.setupWithNavController(bottomNavigationView, navController);
+        NavigationUI.setupWithNavController(binding.bottomNavigatinView, navController);
 //        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
 //                R.id.nav_home, R.id.nav_profile, R.id.nav_aboutus, R.id.nav_setting)
 //                .build();
@@ -90,13 +87,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ActionBarDrawerToggle setupDrawerToggle() {
         // NOTE: Make sure you pass in a valid toolbar reference.  ActionBarDrawToggle() does not require it
         // and will not render the hamburger icon without it.
-        return new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open,  R.string.drawer_close);
+        return new ActionBarDrawerToggle(this, binding.drawerLayout, binding.toolbar, R.string.drawer_open, R.string.drawer_close);
     }
 
     @Override
     public void onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout.closeDrawer(GravityCompat.START);
+        if ( binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            binding.drawerLayout.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
         }
@@ -106,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         item.setChecked(true);
-        drawerLayout.closeDrawers();
+        binding.drawerLayout.closeDrawers();
         switch (item.getItemId()) {
             case R.id.nav_home:
                 navController.navigate(R.id.nav_home);
