@@ -32,5 +32,10 @@
     <fragment
         android:id="@+id/detailsFragment"
         android:name="org.rubikamp.wallpaper.fragments.DetailsFragment"
-        android:label="DetailsFragment" />
+        android:label="DetailsFragment" >
+        <argument
+            android:name="WallpaperMode;"
+            app:argType="org.rubikamp.wallpaper.model.WallpaperModel" />
+    </fragment>
+
 </navigation>

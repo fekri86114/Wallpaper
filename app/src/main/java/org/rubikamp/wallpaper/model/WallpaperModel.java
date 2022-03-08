@@ -1,6 +1,8 @@
 package org.rubikamp.wallpaper.model;
 
-public class WallpaperModel {
+import java.io.Serializable;
+
+public class WallpaperModel implements Serializable {
 
     private String wallpaperImage;
     private String wallpaperName;
@@ -8,6 +10,10 @@ public class WallpaperModel {
     public WallpaperModel(String wallpaperImage, String wallpaperName) {
         this.wallpaperImage = wallpaperImage;
         this.wallpaperName = wallpaperName;
+    }
+
+    public WallpaperModel(){
+
     }
 
     public String getWallpaperImage() {
