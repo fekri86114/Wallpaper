@@ -19,9 +19,11 @@ import java.util.List;
 public class WallpaperAdapter extends RecyclerView.Adapter<WallpaperAdapter.WallpaperViewHolder> {
 
     private List<WallpaperModel> wallpaperModelList;
+    public SetOnItemClickListener listener;
 
-    public WallpaperAdapter(List<WallpaperModel> wallpaperModelList) {
+    public WallpaperAdapter(List<WallpaperModel> wallpaperModelList, SetOnItemClickListener listener) {
         this.wallpaperModelList = wallpaperModelList;
+        this.listener = listener;
     }
 
     public static class WallpaperViewHolder extends RecyclerView.ViewHolder {
@@ -48,11 +50,16 @@ public class WallpaperAdapter extends RecyclerView.Adapter<WallpaperAdapter.Wall
         WallpaperModel wallpaperModel = wallpaperModelList.get(position);
         Glide.with(holder.itemView.getContext()).load(wallpaperModel.getWallpaperImage()).into(holder.imageviewWallpaper);
         holder.textViewWallpaper.setText(wallpaperModel.getWallpaperName());
+        holder.itemView.setOnClickListener(view -> listener.ItemClicked(wallpaperModel));
     }
 
     @Override
     public int getItemCount() {
         return wallpaperModelList.size();
+    }
+
+    public interface SetOnItemClickListener {
+        void ItemClicked(WallpaperModel wallpaperModel);
     }
 
 }
