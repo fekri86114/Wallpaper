@@ -8,7 +8,7 @@
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imageview_wallpaper_details"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         android:layout_margin="@dimen/spacing_2x"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"

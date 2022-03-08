@@ -36,6 +36,10 @@ public class HomeFragment extends Fragment implements WallpaperAdapter.SetOnItem
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        setuprecyclerview();
+    }
+
+    private void setuprecyclerview() {
         wallpaperAdapter = new WallpaperAdapter(setListData(), this);
         binding.recyclerviewWallpaper.setHasFixedSize(true);
 //        binding.recyclerviewWallpaper.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
@@ -64,7 +68,7 @@ public class HomeFragment extends Fragment implements WallpaperAdapter.SetOnItem
     @Override
     public void ItemClicked(WallpaperModel wallpaperModel) {
         Bundle bundle = new Bundle();
-        bundle.putSerializable("WALLPAPER_MODEL", new WallpaperModel());
+        bundle.putSerializable("WALLPAPER_MODEL", wallpaperModel);
         Navigation.findNavController(binding.getRoot()).navigate(R.id.action_nav_home_to_detailsFragment, bundle);
     }
 }
