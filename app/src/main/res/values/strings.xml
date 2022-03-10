@@ -13,5 +13,7 @@
     <string name="are_you_sure_thate_you_want_to_delete_this_item">Are you sure thate you want to delete this item?</string>
     <string name="cancel">Cancel</string>
     <string name="confirm">Confirm</string>
+    <string name="wallpaper_title">Set As Wallpaper</string>
+    <string name="dialog_message">Are you sure?</string>
 
 </resources>

@@ -1,10 +1,13 @@
 package org.rubikamp.wallpaper.fragments;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupMenu;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,6 +18,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import org.rubikamp.wallpaper.R;
 import org.rubikamp.wallpaper.adapter.WallpaperAdapter;
 import org.rubikamp.wallpaper.databinding.FragmentHomeBinding;
+import org.rubikamp.wallpaper.dialog.DeleteBottomSheetDialog;
 import org.rubikamp.wallpaper.model.WallpaperModel;
 
 import java.util.ArrayList;
@@ -85,10 +89,11 @@ public class HomeFragment extends Fragment implements WallpaperAdapter.SetOnItem
         popupMenu.setOnMenuItemClickListener(menuItem -> {
             switch (menuItem.getItemId()) {
                 case R.id.delete:
-
+                    showDeleteBottomSheet();
                     break;
 
                 case R.id.set_wallpaper:
+                    showDialogSetAsWallpaper();
                     break;
             }
 
@@ -96,4 +101,26 @@ public class HomeFragment extends Fragment implements WallpaperAdapter.SetOnItem
         });
         popupMenu.show();
     }
+
+    private void showDeleteBottomSheet() {
+        DeleteBottomSheetDialog bottomSheetDialog = new DeleteBottomSheetDialog();
+        bottomSheetDialog.show(getChildFragmentManager(), "DELETE_BOTTOM_SHEET_DIALOG");
+    }
+
+    private void showDialogSetAsWallpaper() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+        alertDialog.setTitle(getString(R.string.wallpaper_title));
+        alertDialog.setMessage(R.string.dialog_message);
+        alertDialog.setPositiveButton("YES", (dialogInterface, i) -> setAsWallpaper());
+
+        alertDialog.setNegativeButton("NO", (dialogInterface, i) -> dialogInterface.cancel());
+
+        AlertDialog dialog = alertDialog.create();
+        dialog.show();
+    }
+
+    private void  setAsWallpaper(){
+        Toast.makeText(getContext(), "YESSSS", Toast.LENGTH_SHORT).show();
+    }
+
 }
