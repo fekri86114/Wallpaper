@@ -2,8 +2,11 @@ package org.rubikamp.wallpaper.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupMenu;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,7 +22,7 @@ import org.rubikamp.wallpaper.model.WallpaperModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeFragment extends Fragment implements WallpaperAdapter.SetOnItemClickListener {
+public class HomeFragment extends Fragment implements WallpaperAdapter.SetOnItemClickListener, WallpaperAdapter.SetOnMenuClickListener {
 
     private FragmentHomeBinding binding;
     private WallpaperAdapter wallpaperAdapter;
@@ -40,7 +43,7 @@ public class HomeFragment extends Fragment implements WallpaperAdapter.SetOnItem
     }
 
     private void setuprecyclerview() {
-        wallpaperAdapter = new WallpaperAdapter(setListData(), this);
+        wallpaperAdapter = new WallpaperAdapter(setListData(), this, this);
         binding.recyclerviewWallpaper.setHasFixedSize(true);
 //        binding.recyclerviewWallpaper.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 //        binding.recyclerviewWallpaper.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
@@ -70,5 +73,21 @@ public class HomeFragment extends Fragment implements WallpaperAdapter.SetOnItem
         Bundle bundle = new Bundle();
         bundle.putSerializable("WALLPAPER_MODEL", wallpaperModel);
         Navigation.findNavController(binding.getRoot()).navigate(R.id.action_nav_home_to_detailsFragment, bundle);
+    }
+
+    @Override
+    public void MenuClicked(View view) {
+        showPopupMenu(view);
+    }
+
+
+    private void showPopupMenu(View view) {
+        PopupMenu popupMenu = new PopupMenu(getContext(), view);
+        popupMenu.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(menuItem -> {
+            Toast.makeText(getContext(),"You Clicked : " + menuItem.getTitle(), Toast.LENGTH_SHORT).show();
+            return true;
+        });
+        popupMenu.show();
     }
 }
