@@ -9,6 +9,7 @@
         <entry key="app/src/main/res/drawable/ic_menu.xml" value="0.2455" />
         <entry key="app/src/main/res/drawable/information.xml" value="0.132" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/bottom_sheet_delete_layout.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/fragment_aboutus.xml" value="0.27794871794871795" />
         <entry key="app/src/main/res/layout/fragment_details.xml" value="0.165" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.27794871794871795" />

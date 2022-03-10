@@ -2,11 +2,9 @@ package org.rubikamp.wallpaper.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupMenu;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -85,7 +83,15 @@ public class HomeFragment extends Fragment implements WallpaperAdapter.SetOnItem
         PopupMenu popupMenu = new PopupMenu(getContext(), view);
         popupMenu.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
         popupMenu.setOnMenuItemClickListener(menuItem -> {
-            Toast.makeText(getContext(),"You Clicked : " + menuItem.getTitle(), Toast.LENGTH_SHORT).show();
+            switch (menuItem.getItemId()) {
+                case R.id.delete:
+
+                    break;
+
+                case R.id.set_wallpaper:
+                    break;
+            }
+
             return true;
         });
         popupMenu.show();
