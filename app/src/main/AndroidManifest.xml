@@ -3,9 +3,7 @@
     package="org.rubikamp.wallpaper">
 
     <uses-permission android:name="android.permission.INTERNET"/>
-
     <uses-permission android:name="android.permission.SET_WALLPAPER"/>
-
 
     <application
         android:allowBackup="true"
@@ -25,12 +23,9 @@
             </intent-filter>
 
         </activity>
-
         <activity android:name=".fragments.LifecycleActivity"
             android:exported="true">
         </activity>
-
     </application>
-
 
 </manifest>
