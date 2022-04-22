@@ -2,11 +2,7 @@ package org.rubikamp.wallpaper.fragments;
 
 import android.app.AlertDialog;
 import android.app.WallpaperManager;
-import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,11 +12,13 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatImageView;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 
 import org.rubikamp.wallpaper.R;
 import org.rubikamp.wallpaper.adapter.WallpaperAdapter;
@@ -32,23 +30,28 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeFragment extends Fragment implements WallpaperAdapter.SetOnItemClickListener, WallpaperAdapter.SetOnMenuClickListener , DeleteBottomSheetDialog.OnItemDeleteListener {
+public class HomeFragment extends Fragment implements WallpaperAdapter.SetOnItemClickListener, WallpaperAdapter.SetOnMenuClickListener, DeleteBottomSheetDialog.OnItemDeleteListener {
 
     private FragmentHomeBinding binding;
     private WallpaperAdapter wallpaperAdapter;
     private int position;
-private DeleteBottomSheetDialog bottomSheetDialog;
+    private DeleteBottomSheetDialog bottomSheetDialog;
+    private List<WallpaperModel> listItem;
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setuprecyclerview();
     }
+
     private void setuprecyclerview() {
         wallpaperAdapter = new WallpaperAdapter(setListData(), this, this);
         binding.recyclerviewWallpaper.setHasFixedSize(true);
@@ -58,23 +61,25 @@ private DeleteBottomSheetDialog bottomSheetDialog;
         binding.recyclerviewWallpaper.setAdapter(wallpaperAdapter);
 
     }
+
     private List<WallpaperModel> setListData() {
-        List<WallpaperModel> listItem = new ArrayList<>();
-        listItem.add(new WallpaperModel("https://media.istockphoto.com/photos/abstract-wavy-object-picture-id1198271727?b=1&k=20&m=1198271727&s=170667a&w=0&h=b626WM5c-lq9g_yGyD0vgufb4LQRX9UgYNWPaNUVses=", "First Item"));
-        listItem.add(new WallpaperModel("https://images.unsplash.com/photo-1542550371427-311e1b0427cc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MTB8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=900&q=60", "Second Item"));
-        listItem.add(new WallpaperModel("https://media.istockphoto.com/photos/abstract-wavy-object-picture-id1198271727?b=1&k=20&m=1198271727&s=170667a&w=0&h=b626WM5c-lq9g_yGyD0vgufb4LQRX9UgYNWPaNUVses=", "Third Item"));
-        listItem.add(new WallpaperModel("https://media.istockphoto.com/photos/abstract-wavy-object-picture-id1198271727?b=1&k=20&m=1198271727&s=170667a&w=0&h=b626WM5c-lq9g_yGyD0vgufb4LQRX9UgYNWPaNUVses=", "Fourth Item"));
-        listItem.add(new WallpaperModel("https://images.unsplash.com/photo-1542466500-dccb2789cbbb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MTZ8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=900&q=60", "Fifth Item"));
-        listItem.add(new WallpaperModel("https://media.istockphoto.com/photos/abstract-wavy-object-picture-id1198271727?b=1&k=20&m=1198271727&s=170667a&w=0&h=b626WM5c-lq9g_yGyD0vgufb4LQRX9UgYNWPaNUVses=", "Sixth Item"));
-        listItem.add(new WallpaperModel("https://media.istockphoto.com/photos/abstract-wavy-object-picture-id1198271727?b=1&k=20&m=1198271727&s=170667a&w=0&h=b626WM5c-lq9g_yGyD0vgufb4LQRX9UgYNWPaNUVses=", "Seventh Item"));
-        listItem.add(new WallpaperModel("https://media.istockphoto.com/photos/abstract-wavy-object-picture-id1198271727?b=1&k=20&m=1198271727&s=170667a&w=0&h=b626WM5c-lq9g_yGyD0vgufb4LQRX9UgYNWPaNUVses=", "eghith Item"));
-        listItem.add(new WallpaperModel("https://media.istockphoto.com/photos/abstract-wavy-object-picture-id1198271727?b=1&k=20&m=1198271727&s=170667a&w=0&h=b626WM5c-lq9g_yGyD0vgufb4LQRX9UgYNWPaNUVses=", "ninth Item"));
-        listItem.add(new WallpaperModel("https://images.unsplash.com/photo-1541497613813-0780960684f4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80", "ten Item"));
+        listItem = new ArrayList<>();
+        listItem.add(new WallpaperModel("https://uhdwallpapers.org/uploads/cache/1371749998/blue-red-abstract-from-s22_400x225-mm-90.webp", "First Item"));
+        listItem.add(new WallpaperModel("https://uhdwallpapers.org/uploads/cache/1371749998/matebook-x-pro_400x225-mm-90.webp", "Second Item"));
+        listItem.add(new WallpaperModel("https://uhdwallpapers.org/uploads/cache/1371749998/view-from-a-drone-above-the-ocean-shore_400x225-mm-90.webp", "Third Item"));
+        listItem.add(new WallpaperModel("https://uhdwallpapers.org/uploads/cache/3309293265/space-shiptwo_600x338-mm-90.webp", "Fourth Item"));
+        listItem.add(new WallpaperModel("https://uhdwallpapers.org/uploads/cache/1371749998/gta-6-poster_400x225-mm-90.webp", "Fifth Item"));
+        listItem.add(new WallpaperModel("https://uhdwallpapers.org/uploads/cache/1491662440/flintlock-the-siege-of-dawn_400x225-mm-90.webp", "Sixth Item"));
+        listItem.add(new WallpaperModel("https://uhdwallpapers.org/uploads/cache/1371749998/gta-6-gameplay-car_400x225-mm-90.webp", "Seventh Item"));
+        listItem.add(new WallpaperModel("https://uhdwallpapers.org/uploads/cache/1371749998/gta-6-screenshot_400x225-mm-90.webp", "eghith Item"));
+        listItem.add(new WallpaperModel("https://uhdwallpapers.org/uploads/cache/3309293265/rolls-royce-front-side_400x225-mm-90.webp", "ninth Item"));
+        listItem.add(new WallpaperModel("https://uhdwallpapers.org/uploads/cache/1371749998/white-blue-orange-abstract-from-s22_400x225-mm-90.webp", "ten Item"));
         return listItem;
     }
+
     @Override
     public void ItemClicked(WallpaperModel wallpaperModel, int position) {
-       this.position = position;
+        this.position = position;
         Bundle bundle = new Bundle();
         bundle.putSerializable("WALLPAPER_MODEL", wallpaperModel);
         Navigation.findNavController(binding.getRoot()).navigate(R.id.action_nav_home_to_detailsFragment, bundle);
@@ -101,10 +106,12 @@ private DeleteBottomSheetDialog bottomSheetDialog;
         });
         popupMenu.show();
     }
+
     private void showDeleteBottomSheet() {
-         bottomSheetDialog = new DeleteBottomSheetDialog();
+        bottomSheetDialog = new DeleteBottomSheetDialog();
         bottomSheetDialog.show(getChildFragmentManager(), "DELETE_BOTTOM_SHEET_DIALOG");
     }
+
     private void showDialogSetAsWallpaper() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
         alertDialog.setTitle(getString(R.string.wallpaper_title));
@@ -116,19 +123,35 @@ private DeleteBottomSheetDialog bottomSheetDialog;
         AlertDialog dialog = alertDialog.create();
         dialog.show();
     }
+
     private void cancelMessage() {
-        Toast.makeText(requireActivity(), "Cancelled!!", Toast.LENGTH_SHORT).show();
-    }
-    private void setAsWallpaper() {
-        Toast.makeText(requireActivity(), "YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEESSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", Toast.LENGTH_SHORT).show();
-
+        Toast.makeText(requireContext(), "Cancelled!!", Toast.LENGTH_SHORT).show();
     }
 
-    @Override
+    public void setAsWallpaper() {
+        Glide.with(requireContext())
+                .asBitmap()
+                .load(listItem.get(position).getWallpaperImage())
+                .into(new SimpleTarget<Bitmap>() {
+
+                    @Override
+                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+
+                        try {
+                            WallpaperManager.getInstance(requireContext()).setBitmap(resource);
+                            Toast.makeText(requireContext(), "Yesssss...!!!", Toast.LENGTH_SHORT).show();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+    }
+
     public void onItemDelete() {
         wallpaperAdapter.deleteItem(position);
         bottomSheetDialog.dismiss();
     }
 }
+
 
 
