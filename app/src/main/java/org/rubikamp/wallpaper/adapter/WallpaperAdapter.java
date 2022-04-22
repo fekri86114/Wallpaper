@@ -18,7 +18,7 @@ import java.util.List;
 
 public class WallpaperAdapter extends RecyclerView.Adapter<WallpaperAdapter.WallpaperViewHolder> {
 
-    private List<WallpaperModel> wallpaperModelList;
+    public List<WallpaperModel> wallpaperModelList;
     public SetOnItemClickListener listener;
     public SetOnMenuClickListener menuClickListener;
 
@@ -26,21 +26,6 @@ public class WallpaperAdapter extends RecyclerView.Adapter<WallpaperAdapter.Wall
         this.wallpaperModelList = wallpaperModelList;
         this.listener = listener;
         this.menuClickListener = menuClickListener;
-    }
-
-    public static class WallpaperViewHolder extends RecyclerView.ViewHolder {
-
-        private AppCompatTextView textViewWallpaper;
-        private AppCompatImageView imageviewWallpaper;
-        private AppCompatImageView imageMenu;
-
-        public WallpaperViewHolder(@NonNull View itemView) {
-            super(itemView);
-            textViewWallpaper = itemView.findViewById(R.id.textview_wallpaper);
-            imageviewWallpaper = itemView.findViewById(R.id.imageview_wallpaper);
-            imageMenu = itemView.findViewById(R.id.imageview_menu);
-
-        }
     }
 
     @NonNull
@@ -54,9 +39,11 @@ public class WallpaperAdapter extends RecyclerView.Adapter<WallpaperAdapter.Wall
         WallpaperModel wallpaperModel = wallpaperModelList.get(position);
         Glide.with(holder.itemView.getContext()).load(wallpaperModel.getWallpaperImage()).into(holder.imageviewWallpaper);
         holder.textViewWallpaper.setText(wallpaperModel.getWallpaperName());
-        holder.itemView.setOnClickListener(view -> listener.ItemClicked(wallpaperModel));
+        holder.itemView.setOnClickListener(view -> listener.ItemClicked(wallpaperModel, position));
         holder.imageMenu.setOnClickListener(view -> {
             menuClickListener.MenuClicked(holder.imageMenu);
+
+
         });
     }
 
@@ -66,10 +53,30 @@ public class WallpaperAdapter extends RecyclerView.Adapter<WallpaperAdapter.Wall
     }
 
     public interface SetOnItemClickListener {
-        void ItemClicked(WallpaperModel wallpaperModel);
+        void ItemClicked(WallpaperModel wallpaperModel, int position);
     }
 
     public interface SetOnMenuClickListener {
         void MenuClicked(View view);
+    }
+
+    public static class WallpaperViewHolder extends RecyclerView.ViewHolder {
+
+        private final AppCompatTextView textViewWallpaper;
+        private final AppCompatImageView imageviewWallpaper;
+        private final AppCompatImageView imageMenu;
+
+        public WallpaperViewHolder(@NonNull View itemView) {
+            super(itemView);
+            textViewWallpaper = itemView.findViewById(R.id.textview_wallpaper);
+            imageviewWallpaper = itemView.findViewById(R.id.imageview_wallpaper);
+            imageMenu = itemView.findViewById(R.id.imageview_menu);
+
+        }
+    }
+    public void deleteItem(int position){
+        wallpaperModelList.remove(position);
+        notifyItemRemoved(position);
+        notifyItemChanged(position, getItemCount());
     }
 }
