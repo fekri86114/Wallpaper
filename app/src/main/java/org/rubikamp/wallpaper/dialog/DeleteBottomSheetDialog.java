@@ -1,10 +1,11 @@
 package org.rubikamp.wallpaper.dialog;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,11 +14,23 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import org.rubikamp.wallpaper.databinding.BottomSheetDeleteLayoutBinding;
 
-
-
 public class DeleteBottomSheetDialog extends BottomSheetDialogFragment {
 
+    private static final String TAG = "DeleteBottomSheetDialog";
     private BottomSheetDeleteLayoutBinding binding;
+    private OnItemDeleteListener onDeleteItemListener;
+
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        try {
+            onDeleteItemListener = (OnItemDeleteListener) getParentFragment();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.i(TAG, "onAttach: " + e.getMessage());
+        }
+    }
 
     @Nullable
     @Override
@@ -30,11 +43,16 @@ public class DeleteBottomSheetDialog extends BottomSheetDialogFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.buttonCancel.setOnClickListener(it->{
+        binding.buttonCancel.setOnClickListener(it -> {
             dismiss();
         });
-        binding.buttonConfirm.setOnClickListener(it->{
-            Toast.makeText(getContext(), "Confrim", Toast.LENGTH_SHORT).show();
+        binding.buttonConfirm.setOnClickListener(it -> {
+
+            onDeleteItemListener.onItemDelete();
         });
+    }
+
+    public interface OnItemDeleteListener {
+        void onItemDelete();
     }
 }
